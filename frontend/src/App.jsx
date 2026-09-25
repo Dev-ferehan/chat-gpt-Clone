@@ -13,7 +13,7 @@ function App() {
 
 async function fetchConversation(){
 try{
-  const result=await axios.get('http://localhost:9000/api/chat/conversation');
+  const result=await axios.get('https://chat-gpt-clone-d2qk.onrender.com/api/chat/conversation');
  setConversation(result?.data?.data)
 }catch(err){
   console.log("error",err)
@@ -30,8 +30,9 @@ async function submitHandler(question){
   }
   setConversation(prev=>[...prev,tempQuestion])
 try{
+  // https://chat-gpt-clone-d2qk.onrender.com
   setIsLoading(true)
-  const {data}=await axios.post('http://localhost:9000/api/chat/conversation',{
+  const {data}=await axios.post('https://chat-gpt-clone-d2qk.onrender.com/api/chat/conversation',{
     question:question.trim()
   })
   setConversation(prev=>[...prev,data?.data?.assistantConversation])

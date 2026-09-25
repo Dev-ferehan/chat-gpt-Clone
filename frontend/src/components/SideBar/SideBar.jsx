@@ -8,7 +8,7 @@ import {
     FolderKanban,
     PanelLeftClose,
   } from 'lucide-react';
-  import styles from './Sidebar.module.css';
+  import styles from './sidebar.module.css';
   
   export default function Sidebar() {
     return (
