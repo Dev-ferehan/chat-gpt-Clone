@@ -1,23 +1,35 @@
 import dotenv from "dotenv";
 dotenv.config();
+
 import express from "express";
+import cors from "cors";
 import mainRouter from "./src/main.routes.js";
 import { errorHandler } from "./src/middleware/error-handler.js";
+import db from "./db/db.config.js";
+
+
 const app = express();
-import cors from "cors";
+const port = 9000;
+
+// 1. Core Middlewares
 app.use(cors());
 app.use(express.json());
-app.use(errorHandler);
+
+// 2. Main API Routes
 app.use("/api", mainRouter);
 
-async function startServer() {
+app.use(errorHandler);
+
+// 4. Server and Database Initialization
+async function startServer(){
   try {
-    app.listen(9000, (err) => {
-      if (err) throw err;
-      console.log("server is running on port 9000");
+    app.listen(port, () => {
+      console.log("Server is running on port ", port);
     });
   } catch (err) {
-    console.log("something went happened");
+    console.error("Failed to start server:", err.message);
+    process.exit(1);
   }
 }
+
 startServer();

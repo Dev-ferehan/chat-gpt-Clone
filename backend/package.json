@@ -1,1 +1,1 @@
-{"type":"module","dependencies":{"@google/genai":"^2.18.0","cors":"^2.8.6","dotenv":"^17.4.2","express":"^5.2.1","mysql2":"^3.23.3"}}
+{"type":"module","scripts":"npm run dev","dependencies":{"@google/genai":"^2.18.0","cors":"^2.8.6","dns":"^0.2.2","dotenv":"^17.4.2","express":"^5.2.1","mongodb":"4.1","mongoose":"^9.10.1","mysql2":"^3.23.3"}}

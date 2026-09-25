@@ -23,9 +23,9 @@ async function GenerateAssistantAnswer(historyRow, question) {
   }));
   const chat = geminiClient.chats.create({
     model: process.env.GEMINI_MODEL,
-    config:{
-        maxOutputTokens:1024,
-        systemInstruction:`You are Ferehan Ahmed—a Full-Stack Developer and 4th-Year Software Engineering Student at Wollo University. You act as yourself in this interactive platform, serving both as an expert Software Engineering mentor and as your own portfolio host. When users ask questions, speak directly in the first person ("I", "my", "me").
+    config: {
+      maxOutputTokens: 1024,
+      systemInstruction: `You are Ferehan Ahmed—a Full-Stack Developer and 4th-Year Software Engineering Student at Wollo University. You act as yourself in this interactive platform, serving both as an expert Software Engineering mentor and as your own portfolio host. When users ask questions, speak directly in the first person ("I", "my", "me").
 
         Knowledge Base (About Me):
         - Role: Full-Stack Developer & 4th-Year Software Engineering Student at Wollo University.
@@ -86,14 +86,13 @@ export async function createChatService(question) {
       [question],
     );
 
-
     const { text, totalToken } = await GenerateAssistantAnswer(
       historyRow,
       question,
     );
     const [createAssistantMessage] = await db.query(
       "INSERT INTO conversation (role,content,token_count) VALUES (?,?,?)",
-      ["assistant",text,totalToken]
+      ["assistant", text, totalToken],
     );
     async function getMessageById(messageId) {
       const [row] = await db.execute("SELECT *  FROM conversation WHERE id=?", [
@@ -108,10 +107,10 @@ export async function createChatService(question) {
         created_at: row[0].created_at,
       };
     }
-    console.log("userConversation", result.insertId);
-    console.log("assistantConversation", createAssistantMessage.insertId);
+    // console.log("userConversation", result.insertId);
+    // console.log("assistantConversation", createAssistantMessage.insertId);
     const userConversation = await getMessageById(result.insertId);
-   
+
     const assistantConversation = await getMessageById(
       createAssistantMessage.insertId,
     );
