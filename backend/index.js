@@ -9,7 +9,7 @@ import db from "./db/db.config.js";
 
 
 const app = express();
-const port = 9000;
+
 
 // 1. Core Middlewares
 app.use(cors());
@@ -23,8 +23,8 @@ app.use(errorHandler);
 // 4. Server and Database Initialization
 async function startServer(){
   try {
-    app.listen(port, () => {
-      console.log("Server is running on port ", port);
+    app.listen(process.env.DB_PORT, () => {
+      console.log("Server is running on port ", process.env.DB_PORT);
     });
   } catch (err) {
     console.error("Failed to start server:", err.message);
